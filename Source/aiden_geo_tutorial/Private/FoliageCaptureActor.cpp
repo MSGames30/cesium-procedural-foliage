@@ -173,7 +173,7 @@ void AFoliageCaptureActor::BuildFoliageTransforms(UTextureRenderTarget2D* Foliag
 				FVector Location = Georeference->TransformLongitudeLatitudeHeightToUnreal(GeographicCoords);
 
 				// Compute east north up
-				const FMatrix EastNorthUpEngine = Georeference->ComputeEastNorthUpToUnreal(Location);
+				const FMatrix EastNorthUpEngine = Georeference->ComputeEastSouthUpToUnreal(Location);
 
 				for (FFoliageClassificationType& FoliageType : FoliageTypes)
 				{
@@ -355,7 +355,7 @@ void AFoliageCaptureActor::OnUpdate_Implementation(const FVector& NewLocation)
 	bInstancesClearedCalled = false;
 	
 
-	const FRotator PlanetAlignedRotation = Georeference->ComputeEastNorthUpToUnreal(NewLocation).Rotator();
+	const FRotator PlanetAlignedRotation = Georeference->ComputeEastSouthUpToUnreal(NewLocation).Rotator();
 
 	SetActorRotation(
 		PlanetAlignedRotation
